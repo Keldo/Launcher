@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Launcher" GeneratedClassName="Settings1">
+  <Profiles />
+  <Settings>
+    <Setting Name="baseURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://192.168.1.6</Value>
+    </Setting>
+    <Setting Name="readme_patcher" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.twedev.com/game/patcher/PATCHER_README.pdf</Value>
+    </Setting>
+    <Setting Name="libeay" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.twedev.com/game/patcher/libeay32.dll</Value>
+    </Setting>
+    <Setting Name="libmysql" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.twedev.com/game/patcher/libmysql.dll</Value>
+    </Setting>
+    <Setting Name="libssl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.twedev.com/game/patcher/libssl32.dll</Value>
+    </Setting>
+    <Setting Name="ssleay" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.twedev.com/game/patcher/ssleay32.dll</Value>
+    </Setting>
+    <Setting Name="connection_patcher" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.twedev.com/game/patcher/connection_patcher.exe</Value>
+    </Setting>
+    <Setting Name="config" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.twedev.com/game/patcher/WTF/Config.wtf</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
