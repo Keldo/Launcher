@@ -22,20 +22,20 @@ namespace Launcher
             InitializeComponent();
             checkPatch();
             FileVersionInfo launcherVersion = FileVersionInfo.GetVersionInfo("Launcher.exe");
-            //var remoteVersionFile = "http://www.twedev.com/game/version";
-            //using (System.IO.TextReader rVF = new System.IO.StreamReader(remoteVersionFile));
-            //string remoteVersion = remoteVersionFile.ToString();
-            //string localVersion = launcherVersion.FileVersion;
-            //if (localVersion != remoteVersion)
-           // {
-             //label4.Text = "Launcher Update Available";
-            //}
-            //else
-           // {
-                //label4.Text = "Launcher Version: " + launcherVersion.FileVersion;
-           // }
+            string url = "http://www.twedev.com/game/version";
+            WebClient wc = new WebClient();
+            string rVersion = wc.DownloadString(url);
+            string remoteLVersion = rVersion;
+            string localVersion = launcherVersion.FileVersion;
+            if (localVersion == remoteLVersion)
+            {
             label4.Text = "Launcher Version: " + launcherVersion.FileVersion;
-            button4.Visible = false;
+            }
+            else
+            {
+                label4.Text = "Launcher Update Required";
+            }
+            //button4.Visible = false;
 
         }
 
