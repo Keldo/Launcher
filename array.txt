@@ -1,0 +1,21 @@
+private void getPatch()
+	
+	// Set patchList in settings as patchDir
+	
+	string patchList = @"http://www.twedev.com/game/patcher/";
+	DirectoryInfo patchRoot = new DirectoryInfo(patchList);
+	Files[] patchList = patchRoot.GetFiles();
+
+	if (result.Any())
+	{
+		// Visual
+		label1.Text = "Downloading Patch";
+        button2.Image = Properties.Resources.PlayButtonDisabled;
+		
+		// Download
+		var webClient = new WebClient();
+		webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+		webClient.DownloadFileAsync(new Uri(patchList), Files);
+		webClient.DownloadStringCompleted += OnGetDownloadedStringCompleted;
+	
+	}
