@@ -26,5 +26,11 @@
     <Setting Name="config" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://www.twedev.com/game/patcher/WTF/Config.wtf</Value>
     </Setting>
+    <Setting Name="version" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://www.twedev.com/game/version</Value>
+    </Setting>
+    <Setting Name="worldport" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8081</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
