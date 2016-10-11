@@ -47,20 +47,20 @@ namespace Launcher
 
                 status = true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 status = false;
             }
 
-            if (status)
-            {
-                label5.ForeColor = Color.Green;
-                label5.Text = "Online";
-            }
-            else
+            if (status == false)
             {
                 label5.ForeColor = Color.Red;
                 label5.Text = "Offline";
+            }
+            else
+            {
+                label5.ForeColor = Color.Green;
+                label5.Text = "Online";
             }
 
             // End Check Server Status
