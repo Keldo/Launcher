@@ -118,5 +118,29 @@ namespace Launcher {
                 this["config"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/version")]
+        public string version {
+            get {
+                return ((string)(this["version"]));
+            }
+            set {
+                this["version"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8081")]
+        public int worldport {
+            get {
+                return ((int)(this["worldport"]));
+            }
+            set {
+                this["worldport"] = value;
+            }
+        }
     }
 }
