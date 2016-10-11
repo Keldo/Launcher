@@ -21,7 +21,11 @@ namespace Launcher
         public Form1()
         {
             InitializeComponent();
+
+            // Check Patch
             checkPatch();
+
+            // Check Launcher Version
             FileVersionInfo launcherVersion = FileVersionInfo.GetVersionInfo("Launcher.exe");
             string url = Settings1.Default.version;
             WebClient wc = new WebClient();
@@ -36,6 +40,7 @@ namespace Launcher
             {
                 label4.Text = "Launcher Update Required";
             }
+            // End Check Launcher Version
 
             // Check Server Status
             bool status = false;
@@ -66,11 +71,13 @@ namespace Launcher
             // End Check Server Status
         }
 
+        // Close the Launcher
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // Launch the WoW Client
         private void button2_Click(object sender, EventArgs e)
         {
             Process.Start("Wow_Patched.exe");
@@ -78,6 +85,7 @@ namespace Launcher
             this.Close();
         }
 
+        // Check Patch Function
         private void checkPatch()
         {
             // Check for Wow Patch
@@ -99,6 +107,9 @@ namespace Launcher
             }
         }
 
+        // Start Downloads
+        // Should all be referenced in an array
+        // then downloaded with one webClient Asynch Download
         private void getPatch()
         {
             var t = Task.Run(() => {
@@ -205,37 +216,36 @@ namespace Launcher
             DownloadComplete();
         }
 
+        // Download Complete
+        // Does not show when downloads are finished
         private void DownloadComplete()
         {
             var t = Task.Run(() => {
                 label1.Text = "Downloads Complete.";
                 progressBar1.Visible = false;
                 button4.Visible = true;
-                //button2.Visible = true;
             });
             t.Wait();
             goPatch();
         }
 
+        // Offer the Patch Button
         private void goPatch()
         {
             label1.Text = "Ready to Patch.";
             progressBar1.Visible = false;
             button4.Visible = true;
         }
-        private void CloseLauncher()
-        {
-            MessageBox.Show(this, "When the Download is complete, close the Launcher and View the Patcher Readme", "NOTICE", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
 
+        // Referenced but does not show on Download Completion
         private void OnGetDownloadedStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             label1.Text = "Download complete!";
-            //button2.Image = Properties.Resources.PlayButtonDisabled;
             button4.Visible = true;
             progressBar1.Visible = false;
         }
 
+        // Progress Bar
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             progressBar1.Visible = true;
@@ -244,21 +254,24 @@ namespace Launcher
             progressBar1.ForeColor = Color.DarkOrange;
 
             button2.Image = Properties.Resources.PlayButtonDisabled;
-            //button4.Visible = true;
         }
 
+        // Minimize
         private void button3_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
 
+        // Patch the Client
         private void button4_Click(object sender, EventArgs e)
         {
+            // This function needs the Task & Wait in order to run the patch sequence
             var t = Task.Run(() => {
                Process.Start(@"connection_patcher.exe", @"Wow.exe"); 
             });
             t.Wait();
 
+            // Reload the GUI
             button4.Visible = false;
             progressBar1.Visible = false;
             button2.Image = Properties.Resources.Play_No_Hover;
