@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Sockets;
 using Launcher.Properties;
 using System.Threading;
 
@@ -22,7 +23,7 @@ namespace Launcher
             InitializeComponent();
             checkPatch();
             FileVersionInfo launcherVersion = FileVersionInfo.GetVersionInfo("Launcher.exe");
-            string url = "http://www.twedev.com/game/version";
+            string url = Settings1.Default.version;
             WebClient wc = new WebClient();
             string rVersion = wc.DownloadString(url);
             string remoteLVersion = rVersion;
@@ -35,8 +36,34 @@ namespace Launcher
             {
                 label4.Text = "Launcher Update Required";
             }
-            //button4.Visible = false;
 
+            // Check Server Status
+            bool status = false;
+            try
+            {
+                TcpClient client = new TcpClient();
+
+                client.Connect(Settings1.Default.baseURL, Settings1.Default.worldport);
+
+                status = true;
+            }
+            catch (Exception ex)
+            {
+                status = false;
+            }
+
+            if (status)
+            {
+                label5.ForeColor = Color.Green;
+                label5.Text = "Online";
+            }
+            else
+            {
+                label5.ForeColor = Color.Red;
+                label5.Text = "Offline";
+            }
+
+            // End Check Server Status
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,6 +95,7 @@ namespace Launcher
                 label1.Text = "World of Warcraft is up to date";
                 progressBar1.Visible = false;
                 button2.Image = Properties.Resources.Play_No_Hover;
+                button4.Visible = false;
             }
         }
 
