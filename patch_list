@@ -1,0 +1,5 @@
+libeay32.dll, 
+libmysql.dll, 
+libssl32.dll, 
+ssleay32.dll, 
+connection_patcher.exe

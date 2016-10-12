@@ -18,12 +18,12 @@ namespace Launcher
 {
     public partial class Form1 : Form
     {
+        Stopwatch sw = new Stopwatch();
         public Form1()
         {
             InitializeComponent();
-
-            // Check Patch
-            checkPatch();
+            button5.Visible = false;
+            button4.Visible = false;
 
             // Check Launcher Version
             FileVersionInfo launcherVersion = FileVersionInfo.GetVersionInfo("Launcher.exe");
@@ -34,7 +34,7 @@ namespace Launcher
             string localVersion = launcherVersion.FileVersion;
             if (localVersion == remoteLVersion)
             {
-            label4.Text = "Launcher Version: " + launcherVersion.FileVersion;
+                label4.Text = "Launcher Version: " + launcherVersion.FileVersion;
             }
             else
             {
@@ -48,7 +48,7 @@ namespace Launcher
             {
                 TcpClient client = new TcpClient();
 
-                client.Connect(Settings1.Default.baseURL, Settings1.Default.worldport);
+                client.Connect(Settings1.Default.realmlist, Settings1.Default.port);
 
                 status = true;
             }
@@ -57,18 +57,20 @@ namespace Launcher
                 status = false;
             }
 
-            if (status == false)
-            {
-                label5.ForeColor = Color.Red;
-                label5.Text = "Offline";
-            }
-            else
+            if (status)
             {
                 label5.ForeColor = Color.Green;
                 label5.Text = "Online";
             }
+            else
+            {
+                label5.ForeColor = Color.Red;
+                label5.Text = "Offline";
+            }
 
             // End Check Server Status
+            // System.Threading.Thread.Sleep(5000);
+            checkWoW();
         }
 
         // Close the Launcher
@@ -85,17 +87,43 @@ namespace Launcher
             this.Close();
         }
 
-        // Check Patch Function
-        private void checkPatch()
+        // Check Wow Client Function
+        private void checkWoW()
+        {
+            string wowexe = @"Wow.exe";
+            if (!File.Exists(wowexe))
+            {
+                label1.Text = "Cannot find Wow.exe. Is WoW Installed?";
+                button2.Image = Properties.Resources.PlayButtonDisabled;
+                button4.Visible = false;
+                progressBar1.Visible = true;
+                button5.Visible = true;
+                resultLabel.Visible = false;
+
+            }
+            else
+            {
+                checkPatch();
+            }
+        }
+
+        private void installWoW()
+        {
+            Process.Start("World-of-Warcraft-Setup-enUS.exe");
+            this.Close();
+
+        }
+
+    // Check Patch Function
+    private void checkPatch()
         {
             // Check for Wow Patch
             string patchexe = @"Wow_Patched.exe";
             if (!File.Exists(patchexe))
             {
                 label1.Text = "WOW PATCH IS NOT INSTALLED";
-                //button2.Image = Properties.Resources.PlayButtonDisabled;
-                progressBar1.Visible = false;
-                button4.Visible = true;
+                button2.Image = Properties.Resources.PlayButtonDisabled;
+                progressBar1.Visible = true;
                 getPatch();
             }
             else
@@ -104,129 +132,99 @@ namespace Launcher
                 progressBar1.Visible = false;
                 button2.Image = Properties.Resources.Play_No_Hover;
                 button4.Visible = false;
+                resultLabel.Visible = false;
+                button6.Visible = false;
             }
         }
 
         // Start Downloads
-        // Should all be referenced in an array
-        // then downloaded with one webClient Asynch Download
         private void getPatch()
         {
-            var t = Task.Run(() => {
-                label1.Text = "Downloading Connection Patcher";
-                button2.Image = Properties.Resources.PlayButtonDisabled;
-                //button4.Visible = true;
-                progressBar1.Visible = true;
-                progressBar1.BackColor = Color.Black;
-                progressBar1.ForeColor = Color.DarkOrange;
-            
+            sw.Start();
+            string patchlist = Settings1.Default.patchlist; 
+            label1.Text = "Downloading";
+            button2.Image = Properties.Resources.PlayButtonDisabled;
+            button4.Visible = false;
+            progressBar1.Visible = true;
+            Directory.CreateDirectory("WTF");
+
+            string[] files = new string[5];
+            files[0] = "libeay32.dll";
+            files[1] = "libmysql.dll";
+            files[2] = "libssl32.dll";
+            files[3] = "ssleay32.dll";
+            files[4] = "connection_patcher.exe";
+            files[5] = "WTF\\Config.wtf";
+
+            // Loop 
+            foreach (var file in files)
+            {
+
                 var webClient = new WebClient();
                 webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                webClient.DownloadFileAsync(new Uri(Settings1.Default.connection_patcher), "connection_patcher.exe");
-            });
-            t.Wait();
-            GetM1();
-        }
-
-        private void GetM1()
-        {
-            var t = Task.Run(() => {
-                button2.Image = Properties.Resources.PlayButtonDisabled;
-                //button4.Visible = true;
-                label1.Text = "Downloading Readme PDF";
-                var webClient = new WebClient();
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                webClient.DownloadFileAsync(new Uri(Settings1.Default.readme_patcher), "PATCHER_README.pdf");
-            });
-            t.Wait();
-            GetM2();
-
-        }
-
-        private void GetM2()
-        {
-            var t = Task.Run(() => {
-                button2.Image = Properties.Resources.PlayButtonDisabled;
-                //button4.Visible = true;
-                label1.Text = "Downloading";
-                var webClient = new WebClient();
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                webClient.DownloadFileAsync(new Uri(Settings1.Default.libeay), "libeay32.dll");
-            });
-            t.Wait();
-            GetM3();
-        }
-
-        private void GetM3()
-        {
-            var t = Task.Run(() => {
-                button2.Image = Properties.Resources.PlayButtonDisabled;
-                //button4.Visible = true;
-                label1.Text = "Downloading";
-                var webClient = new WebClient();
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                webClient.DownloadFileAsync(new Uri(Settings1.Default.libmysql), "libmysql.dll");
-            });
-            t.Wait();
-            GetM4();
-        }
-
-        private void GetM4()
-        {
-            var t = Task.Run(() => {
-                button2.Image = Properties.Resources.PlayButtonDisabled;
-               // button4.Visible = true;
-                label1.Text = "Downloading";
-                var webClient = new WebClient();
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                webClient.DownloadFileAsync(new Uri(Settings1.Default.libssl), "libssl32.dll");
-            });
-            t.Wait();
-            GetM5();
-        }
-
-        private void GetM5()
-        {
-            var t = Task.Run(() => {
-                button2.Image = Properties.Resources.PlayButtonDisabled;
-            //button4.Visible = true;
-                label1.Text = "Downloading";
-                var webClient = new WebClient();
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                webClient.DownloadFileAsync(new Uri(Settings1.Default.ssleay), "ssley32.dll");
                 webClient.DownloadStringCompleted += OnGetDownloadedStringCompleted;
-            });
-            t.Wait();
-            GetM6();
-        }
-
-        private void GetM6()
-        {
-            var t = Task.Run(() => {
-                Directory.CreateDirectory("WTF");
-                 button2.Image = Properties.Resources.PlayButtonDisabled;
-            //button4.Visible = true;
-                label1.Text = "Downloading Config";
-                var webClient = new WebClient();
-                webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                webClient.DownloadFileAsync(new Uri(Settings1.Default.config), "WTF\\Config.wtf");
-                webClient.DownloadStringCompleted += OnGetDownloadedStringCompleted;
-            });
-            t.Wait();
+                webClient.DownloadFileAsync(new Uri(Settings1.Default.baseURL + file), file);
+            }
             DownloadComplete();
         }
 
         // Download Complete
-        // Does not show when downloads are finished
         private void DownloadComplete()
         {
-            var t = Task.Run(() => {
-                label1.Text = "Downloads Complete.";
-                progressBar1.Visible = false;
+            sw.Reset();
+            label1.Text = "Downloads Complete.";
+            progressBar1.Visible = true;
+            string installer = "World-of-Warcraft-Setup-enUS.exe";
+            if (File.Exists(installer))
+            {
+                button6.Visible = true;
+            }
+
+            string patcher = "Wow_patched.exe";
+            if (File.Exists(patcher))
+            {
                 button4.Visible = true;
-            });
-            t.Wait();
-            goPatch();
+            }
+            
+            /*
+            string patchedexe = @"Wow_Patched.exe";
+            string game = @"Wow.exe";
+            if (!File.Exists(patc11hedexe))
+            {
+                label4.Text = "Ready to Patch";
+            }
+            else
+            {
+                if (!File.Exists(game))
+                {
+                    label1.Text = "Wow is NOT installed!";
+                    button5.Visible = true;
+                }
+                else
+                {
+                    label1.Text = "Start Wow to finish the install";
+                    button2.Image = Properties.Resources.Play_No_Hover;
+                }
+                button2.Image = Properties.Resources.PlayButtonDisabled;
+                label1.Text = "Check your installation, do you have everything?";
+            }
+            if(File.Exists(patchedexe))
+            {
+                button2.Image = Properties.Resources.Play_No_Hover;
+            }
+            else
+            {
+                Form1();
+            }
+            if (File.Exists(game)){
+                button2.Image = Properties.Resources.Play_No_Hover;
+            }
+            else
+            {
+                button5.Visible = true;
+            }
+            
+            */    
         }
 
         // Offer the Patch Button
@@ -243,16 +241,14 @@ namespace Launcher
             label1.Text = "Download complete!";
             button4.Visible = true;
             progressBar1.Visible = false;
+            DownloadComplete();
         }
 
         // Progress Bar
         private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            progressBar1.Visible = true;
-            progressBar1.Value = e.ProgressPercentage;
-            progressBar1.BackColor = Color.Black;
-            progressBar1.ForeColor = Color.DarkOrange;
-
+            this.progressBar1.Value = e.ProgressPercentage;
+            resultLabel.Text = e.ProgressPercentage.ToString() + "%";
             button2.Image = Properties.Resources.PlayButtonDisabled;
         }
 
@@ -276,6 +272,22 @@ namespace Launcher
             progressBar1.Visible = false;
             button2.Image = Properties.Resources.Play_No_Hover;
             label1.Text = "World of Warcraft is up to date";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // Download WoW
+            var webClient = new WebClient();
+            string installer = "World-of-Warcraft-Setup-enUS.exe";
+            webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+            webClient.DownloadStringCompleted += OnGetDownloadedStringCompleted;
+            webClient.DownloadFileAsync(new Uri(Settings1.Default.install + installer), installer);
+            progressBar1.Visible = true;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            installWoW();
         }
     }
 }

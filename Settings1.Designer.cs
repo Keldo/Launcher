@@ -25,7 +25,7 @@ namespace Launcher {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://192.168.1.6")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/")]
         public string baseURL {
             get {
                 return ((string)(this["baseURL"]));
@@ -35,111 +35,114 @@ namespace Launcher {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/PATCHER_README.pdf")]
         public string readme_patcher {
             get {
                 return ((string)(this["readme_patcher"]));
             }
-            set {
-                this["readme_patcher"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/libeay32.dll")]
         public string libeay {
             get {
                 return ((string)(this["libeay"]));
             }
-            set {
-                this["libeay"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/libmysql.dll")]
         public string libmysql {
             get {
                 return ((string)(this["libmysql"]));
             }
-            set {
-                this["libmysql"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/libssl32.dll")]
         public string libssl {
             get {
                 return ((string)(this["libssl"]));
             }
-            set {
-                this["libssl"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/ssleay32.dll")]
         public string ssleay {
             get {
                 return ((string)(this["ssleay"]));
             }
-            set {
-                this["ssleay"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/connection_patcher.exe")]
         public string connection_patcher {
             get {
                 return ((string)(this["connection_patcher"]));
             }
-            set {
-                this["connection_patcher"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/WTF/Config.wtf")]
         public string config {
             get {
                 return ((string)(this["config"]));
             }
-            set {
-                this["config"] = value;
-            }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/version")]
         public string version {
             get {
                 return ((string)(this["version"]));
             }
-            set {
-                this["version"] = value;
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.1.6")]
+        public string realmlist {
+            get {
+                return ((string)(this["realmlist"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8081")]
+        public int port {
+            get {
+                return ((int)(this["port"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/patcher/patch_list")]
+        public string patchlist {
+            get {
+                return ((string)(this["patchlist"]));
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("8081")]
-        public int worldport {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://www.twedev.com/game/install/")]
+        public string install {
             get {
-                return ((int)(this["worldport"]));
+                return ((string)(this["install"]));
             }
             set {
-                this["worldport"] = value;
+                this["install"] = value;
             }
         }
     }
