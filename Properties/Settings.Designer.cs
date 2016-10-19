@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Launcher.Properties
+namespace INSTALL.Properties
 {
 
 
