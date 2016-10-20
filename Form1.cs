@@ -69,6 +69,11 @@ namespace INSTALL
 
             // All game content would be downloaded here, using the Installer for test purposes.
             new WebClient().DownloadFile("http://www.twedev.com/game/patcher/World-of-Warcraft-Setup-enUS.exe", "World-of-Warcraft-Setup-enUS.exe");
+            
+            /*
+             * For some reason, while attempting to download anything after this point
+             * cases a Error in System.dll referencing System.Net.
+            */
 
             /*
              * Since WoW, at its current release is a little over 30GB of data
