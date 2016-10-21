@@ -13,3 +13,8 @@ See the FlowChart to get an idea on how this Launcher is coded
 # Collaborative
 
 This project, like TrinityCore is Collaborative in Nature.
+
+# IRC
+
+This project is now on IRC within the Rizon Network
+Connect your IRC Client to irc.rizon.net and join #twedev 
