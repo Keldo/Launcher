@@ -1,0 +1,9 @@
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\bin\Debug\LauncherV3.exe.config
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\bin\Debug\LauncherV3.exe
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\bin\Debug\LauncherV3.pdb
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.csprojResolveAssemblyReference.cache
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.Properties.Resources.resources
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.csproj.GenerateResource.Cache
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.exe
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.pdb
+C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.frmMain.resources
