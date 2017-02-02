@@ -14,7 +14,6 @@ See the FlowChart to get an idea on how this Launcher is coded
 
 This project, like TrinityCore is Collaborative in Nature.
 
-# IRC
+# To Do
 
-This project is now on IRC within the Rizon Network
-Connect your IRC Client to irc.rizon.net and join #twedev 
+Please see the <a href="https://github.com/Keldo/Launcher/blob/master/ToDo.md">**To Do**</a>
