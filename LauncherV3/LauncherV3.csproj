@@ -31,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>app.ico</ApplicationIcon>
@@ -97,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <None Include="Resources\PlayButtonDisabled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

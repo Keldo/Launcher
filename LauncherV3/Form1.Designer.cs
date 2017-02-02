@@ -28,18 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnExit = new System.Windows.Forms.Button();
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
             this.webBrowser3 = new System.Windows.Forms.WebBrowser();
-            this.btnPlay = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lblWoWversion = new System.Windows.Forms.Label();
             this.lnkLbl1 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnMinimize = new System.Windows.Forms.Button();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lblMain = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnPlay = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -91,36 +95,6 @@
             this.webBrowser3.Url = new System.Uri("http://www.trinitywow.org/launcher/pages/realm-status.php", System.UriKind.Absolute);
             this.webBrowser3.WebBrowserShortcutsEnabled = false;
             // 
-            // btnPlay
-            // 
-            this.btnPlay.BackgroundImage = global::LauncherV3.Properties.Resources.Play_No_Hover;
-            this.btnPlay.FlatAppearance.BorderSize = 0;
-            this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPlay.Location = new System.Drawing.Point(32, 573);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(143, 89);
-            this.btnPlay.TabIndex = 7;
-            this.btnPlay.UseVisualStyleBackColor = true;
-            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(56, 308);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(292, 179);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::LauncherV3.Properties.Resources.illidan;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1145, 457);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            // 
             // lblWoWversion
             // 
             this.lblWoWversion.AutoSize = true;
@@ -145,6 +119,7 @@
             this.lnkLbl1.TabIndex = 9;
             this.lnkLbl1.TabStop = true;
             this.lnkLbl1.Text = "Patch Notes";
+            this.toolTip1.SetToolTip(this.lnkLbl1, "Click here to view the current patch notes.");
             this.lnkLbl1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLbl1_LinkClicked);
             // 
             // label1
@@ -183,6 +158,56 @@
             this.btnMinimize.UseVisualStyleBackColor = false;
             this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.BackColor = System.Drawing.Color.DimGray;
+            this.progressBar1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.progressBar1.Location = new System.Drawing.Point(203, 606);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(815, 17);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 13;
+            // 
+            // lblMain
+            // 
+            this.lblMain.AutoSize = true;
+            this.lblMain.ForeColor = System.Drawing.Color.DodgerBlue;
+            this.lblMain.Location = new System.Drawing.Point(203, 583);
+            this.lblMain.Name = "lblMain";
+            this.lblMain.Size = new System.Drawing.Size(35, 13);
+            this.lblMain.TabIndex = 14;
+            this.lblMain.Text = "label3";
+            // 
+            // btnPlay
+            // 
+            this.btnPlay.BackgroundImage = global::LauncherV3.Properties.Resources.Play_No_Hover;
+            this.btnPlay.FlatAppearance.BorderSize = 0;
+            this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPlay.Location = new System.Drawing.Point(32, 573);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(143, 89);
+            this.btnPlay.TabIndex = 7;
+            this.btnPlay.UseVisualStyleBackColor = true;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(56, 308);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(292, 179);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::LauncherV3.Properties.Resources.illidan;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(1145, 457);
+            this.pictureBox2.TabIndex = 1;
+            this.pictureBox2.TabStop = false;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,6 +215,8 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1144, 685);
             this.ControlBox = false;
+            this.Controls.Add(this.lblMain);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnMinimize);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -230,6 +257,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnMinimize;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lblMain;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
