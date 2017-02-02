@@ -1,9 +1,10 @@
 # To Do
- - Add process check to see if game is running, report to launcher
+ - Add process check to see if game is running, report to launcher (Class)
  - Add launcher update (Check, Download, Shut Down, Update, Start)
- - Create XML reader to read remote XML and report within the Launcher (No Web Browsers)
+ - Create XML reader to read remote XML and report within the Launcher (No Web Browsers) (Class)
  - Create Server Image to be placed on the Launcher (Trinity WoW Branding)
- - Add timer to periodically check for Game Update, Launcher Update and Process
+ - Add timer to periodically check for Game Update, Launcher Update and Process (Class)
+ - add Complete Client Install Class
  
  # What's Already Done
  [x] Client Update
