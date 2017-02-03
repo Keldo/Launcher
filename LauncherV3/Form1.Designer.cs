@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.btnExit = new System.Windows.Forms.Button();
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
@@ -41,6 +42,8 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblMain = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lblWarning = new System.Windows.Forms.Label();
+            this.btnWelcome = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -160,8 +163,8 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.BackColor = System.Drawing.Color.DimGray;
-            this.progressBar1.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.progressBar1.BackColor = System.Drawing.Color.Black;
+            this.progressBar1.ForeColor = System.Drawing.Color.Transparent;
             this.progressBar1.Location = new System.Drawing.Point(203, 606);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(815, 17);
@@ -177,6 +180,31 @@
             this.lblMain.Size = new System.Drawing.Size(35, 13);
             this.lblMain.TabIndex = 14;
             this.lblMain.Text = "label3";
+            // 
+            // lblWarning
+            // 
+            this.lblWarning.AutoSize = true;
+            this.lblWarning.ForeColor = System.Drawing.Color.Red;
+            this.lblWarning.Location = new System.Drawing.Point(423, 548);
+            this.lblWarning.Name = "lblWarning";
+            this.lblWarning.Size = new System.Drawing.Size(35, 13);
+            this.lblWarning.TabIndex = 15;
+            this.lblWarning.Text = "label3";
+            // 
+            // btnWelcome
+            // 
+            this.btnWelcome.BackgroundImage = global::LauncherV3.Properties.Resources.settings;
+            this.btnWelcome.FlatAppearance.BorderSize = 0;
+            this.btnWelcome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnWelcome.ForeColor = System.Drawing.Color.White;
+            this.btnWelcome.Location = new System.Drawing.Point(985, 644);
+            this.btnWelcome.Name = "btnWelcome";
+            this.btnWelcome.Size = new System.Drawing.Size(23, 20);
+            this.btnWelcome.TabIndex = 16;
+            this.btnWelcome.Text = "?";
+            this.btnWelcome.UseVisualStyleBackColor = true;
+            this.btnWelcome.Click += new System.EventHandler(this.btnWelcome_Click);
             // 
             // btnPlay
             // 
@@ -215,6 +243,8 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1144, 685);
             this.ControlBox = false;
+            this.Controls.Add(this.btnWelcome);
+            this.Controls.Add(this.lblWarning);
             this.Controls.Add(this.lblMain);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnMinimize);
@@ -230,6 +260,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMain";
@@ -260,6 +291,8 @@
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lblMain;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lblWarning;
+        private System.Windows.Forms.Button btnWelcome;
     }
 }
 

@@ -73,26 +73,6 @@ namespace LauncherV3.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap legion_logo {
-            get {
-                object obj = ResourceManager.GetObject("legion_logo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap LegionLogo_lessglow {
-            get {
-                object obj = ResourceManager.GetObject("LegionLogo_lessglow", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Play_No_Hover {
             get {
                 object obj = ResourceManager.GetObject("Play-No-Hover", resourceCulture);
@@ -106,6 +86,16 @@ namespace LauncherV3.Properties {
         internal static System.Drawing.Bitmap PlayButtonDisabled {
             get {
                 object obj = ResourceManager.GetObject("PlayButtonDisabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap settings {
+            get {
+                object obj = ResourceManager.GetObject("settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
