@@ -11,17 +11,35 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Net;
 using System.IO;
+using System.Timers;
 
 namespace LauncherV3
 {
     public partial class frmMain : Form
     {
+        System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         public frmMain()
         {
             InitializeComponent();
             progressBar1.Visible = false;
             lblMain.Visible = false;
             lblWarning.Visible = false;
+            lblGameStatus.Visible = false;
+
+            timer.Tick += new EventHandler(timer_Tick); // Every time timer ticks, timer_Tick will be called
+            timer.Interval = (10) * (1000);             // Timer will tick every 10 seconds
+            timer.Enabled = true;                       // Enable the timer
+            timer.Start();                              // Start the timer
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            // Check updates every 10 seconds via the timer
+            wowVersion();
+            launcherVersion();
+
+            // Check game process ( 0 or 1) via the timer
+            //CheckGameProcess();
         }
 
         private void wowVersion()
@@ -46,14 +64,87 @@ namespace LauncherV3
                 }
                 else
                 {
-                    lblWoWversion.Text = "Update WoW.";
+                    lblWoWversion.Text = "Wow Update.";
                     updateWoW();
                 }
             }
             else
             {
+                lblWoWversion.Visible = false;
+                lblWarning.Text = "Downlading World of Warcraft for the Trinity Servers";
                 updateWoW();
             }
+        }
+
+        private void launcherVersion()
+        {
+                // Game specific Variables from Class1
+                var launcher_version = new Class1().versionURL;
+                var launcher_build = new Class1().launcherBuild;
+
+                // Local Game Version
+                FileVersionInfo lversion = FileVersionInfo.GetVersionInfo("Launcher.exe");
+                string localLVersion = lversion.FileVersion;
+
+                // We will need a web connection to read the remote version file
+                WebClient connect = new WebClient();
+                string remoteLVersionFile = connect.DownloadString(launcher_version + launcher_build);
+
+                if (localLVersion == remoteLVersionFile)
+                {
+                   
+                }
+                else
+                {
+                    lblWarning.Visible = true;
+                    lblWarning.Text = "A Launcher Update will be downloaded and installed.";
+                    updateLauncher();
+                }
+        }
+
+        private void updateLauncher()
+        {
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
+            backgroundWorker.WorkerReportsProgress = true;
+            DoWorkEventHandler workEventHandler = new DoWorkEventHandler(this.worker2_DoWork);
+            backgroundWorker.DoWork += workEventHandler;
+            ProgressChangedEventHandler changedEventHandler = new ProgressChangedEventHandler(this.worker1_ProgressChanged);
+            backgroundWorker.ProgressChanged += changedEventHandler;
+            RunWorkerCompletedEventHandler completedEventHandler = new RunWorkerCompletedEventHandler(this.worker2_Complete);
+            backgroundWorker.RunWorkerCompleted += completedEventHandler;
+            backgroundWorker.RunWorkerAsync();
+            this.btnPlay.BackgroundImage = global::LauncherV3.Properties.Resources.PlayButtonDisabled;
+        }
+
+        private void worker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                (sender as BackgroundWorker).ReportProgress(i);
+                Thread.Sleep(200);
+            }
+
+            // variables pooled from Class1
+            var toolsURL = new Class1().toolsURL;
+            var f1 = new Class1().launcherUpdater;
+
+            try
+            {
+                new WebClient().DownloadFile(toolsURL + f1, f1);
+            }
+            catch
+            {
+                lblWarning.Visible = true;
+                lblWarning.Text = "Unable to Download files, please check you internet connection.";
+                progressBar1.Visible = false;
+            }
+        }
+
+        private void worker2_Complete(object sender, EventArgs e)
+        {
+            this.lblMain.Text = "Install Complete, Patching";
+            this.progressBar1.Visible = false;
+            patchLauncher();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -64,6 +155,7 @@ namespace LauncherV3
         private void frmMain_Load(object sender, EventArgs e)
         {
             wowVersion();
+            cleanUp();
         }
 
         private void lnkLbl1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -186,28 +278,87 @@ namespace LauncherV3
         // Check if the Game is running (Process.GetProcess() and report)
         //void CheckGameProcess()
         //{
-        //    Process[] gameProcess = Process.GetProcessesByName("World of Warcraft");
+        //    //Process gameProcess = null;
 
-        //    System.Timers.Timer checkTimer = new System.Timers.Timer(2000);
-        //    checkTimer.AutoReset = true;
-        //    checkTimer.Enabled = true;
+        //    // Needs a bool respsonse
+        //    try
+        //    {
+        //        Process[] gameProcess = Process.GetProcessesByName("World of Warcraft");
+        //        Convert.ToBoolean(true);
+        //        return (gameProcess = 1);
 
-        //    if (gameProcess == null)
-        //    {
-        //        // Show that the game is not running
-        //        this.btnPlay.BackgroundImage = global::LauncherV3.Properties.Resources.Play_No_Hover;
-        //        this.lblGameStatus.Visible = false;
+        //        if (gameProcess == false)
+        //        {
+
+        //            // Show that the game is not running
+        //            this.btnPlay.BackgroundImage = global::LauncherV3.Properties.Resources.Play_No_Hover;
+        //            this.lblGameStatus.Visible = false;
+        //        }
+        //        else
+        //        {
+        //            // Show that the game is running
+        //            this.btnPlay.BackgroundImage = global::LauncherV3.Properties.Resources.PlayButtonDisabled;
+        //            this.lblGameStatus.Visible = true;
+        //            this.lblGameStatus.Text = "Game is Running";
+        //        }
         //    }
-        //    else
+        //    catch
         //    {
-        //        // Show that the game is running
-        //        this.btnPlay.BackgroundImage = global::LauncherV3.Properties.Resources.PlayButtonDisabled;
-        //        this.lblGameStatus.Visible = true;
-        //        this.lblGameStatus.Text = "Game is Running";
+        //        MessageBox.Show("ERROR!");
         //    }
+            
         //}
 
         // Launcher Update
         // Open in a new thread
+        private void patchLauncher()
+        {
+            Thread.Sleep(5000);
+            Process lUpdate = new Process();
+            lUpdate.StartInfo.FileName = "Launcher_Update.exe";
+            //lUpdate.StartInfo.Arguments = "/s";
+            lUpdate.StartInfo.CreateNoWindow = true;
+            lUpdate.StartInfo.UseShellExecute = false;
+            lUpdate.Start();
+
+            // Shut the launcher down
+            Application.Exit();
+        }
+
+        // Cleaning up
+        private void cleanUp()
+        {
+            var patcher1 = new Class1().file6;
+            var patcher2 = new Class1().launcherUpdater;
+            var mysqldll = new Class1().file3;
+            var sslddll = new Class1().file4;
+            var ssl2dll = new Class1().file5;
+            var eaydll = new Class1().file2;
+
+            if(File.Exists(patcher1))
+            {
+                File.Delete(patcher1);
+            }
+            if(File.Exists(patcher2))
+            {
+                File.Delete(patcher2);
+            }
+            if (File.Exists(mysqldll))
+            {
+                File.Delete(mysqldll);
+            }
+            if (File.Exists(sslddll))
+            {
+                File.Delete(sslddll);
+            }
+            if (File.Exists(ssl2dll))
+            {
+                File.Delete(ssl2dll);
+            }
+            if (File.Exists(eaydll))
+            {
+                File.Delete(eaydll);
+            }
+        }
     }
 }

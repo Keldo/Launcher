@@ -7,3 +7,6 @@ C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\D
 C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.exe
 C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.pdb
 C:\Users\Scott\Documents\Visual Studio 2015\Projects\LauncherV3\LauncherV3\obj\Debug\LauncherV3.frmMain.resources
+D:\Projects\Launcher\LauncherV3\bin\Debug\LauncherV3.exe.config
+D:\Projects\Launcher\LauncherV3\obj\Debug\LauncherV3.exe
+D:\Projects\Launcher\LauncherV3\obj\Debug\LauncherV3.pdb

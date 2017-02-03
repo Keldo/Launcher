@@ -19,6 +19,8 @@ namespace LauncherV3
         internal string file5 { get; set; }
         internal string file6 { get; set; }
         internal string file7 { get; set; }
+        internal string toolsURL { get; set; }
+        internal string launcherUpdater { get; set; }
 
         public Class1()
         {
@@ -28,6 +30,8 @@ namespace LauncherV3
             
             // Launcher Version
             launcherBuild = "launcher";
+            toolsURL = "http://www.trinitywow.org/game/tools/";
+            launcherUpdater = "Launcher_Update.exe";
 
             // Game Files
             installURL = "http://www.trinitywow.org/game/install/legion/";
