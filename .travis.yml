@@ -3,10 +3,16 @@ language: cpp
 git:
   depth: 1
   
-configuration: release
+configuration: Release
 platform: Any CPU
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "1.0.{build}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
   
 test: Launcher.exe
   
 artifacts:
-    path: Launcher.zip
+    - path: bin\Release\Launcher.exe
