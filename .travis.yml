@@ -1,18 +1,19 @@
-language: cpp
+version: 1.0.{build}
 
-git:
-  depth: 1
-  
 configuration: Release
+
 platform: Any CPU
-assembly_info:
-  patch: true
-  file: AssemblyInfo.*
-  assembly_version: "1.0.{build}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
-  
-test: Launcher.exe
-  
+
+clone_depth: 1
+
+build:
+
+  verbosity: minimal
+
 artifacts:
-    - path: bin\Release\Launcher.exe
+
+- path: LauncherV3\bin\Release\LauncherV3.exe
+
+  name: Launcher
+
+  type: zip
