@@ -6,5 +6,4 @@ git:
 test: Launcher.exe
   
 artifacts:
-    - path: bin\Release\Launcher.exe
-    - name: Launcher
+    - path: Launcher.zip
