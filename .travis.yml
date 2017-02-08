@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: 1.0.4.{build}
 
 configuration: Release
 
@@ -6,14 +6,54 @@ platform: Any CPU
 
 clone_depth: 1
 
+assembly_info:
+
+  patch: true
+
+  file: '**\AssemblyInfo.*'
+
+  assembly_version: '{version}'
+
+  assembly_file_version: '{version}'
+
+  assembly_informational_version: '{version}'
+
 build:
+
+  publish_wap: true
 
   verbosity: minimal
 
+before_package:
+
+- cmd: >-
+
+    cd LauncherV3\bin\Release
+
+
+
+    copy LauncherV3.exe Launcher.exe
+
 artifacts:
 
-- path: LauncherV3\bin\Release\LauncherV3.exe
+- path: LauncherV3\bin\Release
 
   name: Launcher
 
-  type: zip
+  type: WebDeployPackage
+
+deploy: off
+
+notifications:
+
+- provider: Email
+
+  to:
+
+  secure: zRuLi0gXICk4srbQX2Drw4eI0ZSfuEiHXoxsnjGfjaVgCl1N4VbLFYRQjOxgyttI
+
+  on_build_success: true
+
+  on_build_failure: true
+
+  on_build_status_changed: true
