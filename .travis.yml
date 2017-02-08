@@ -2,3 +2,9 @@ language: cpp
 
 git:
   depth: 1
+  
+test: Launcher.exe
+  
+artifacts:
+    - path: bin\Release\Launcher.exe
+    - name: Launcher
